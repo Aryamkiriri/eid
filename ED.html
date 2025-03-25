@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهنئة عيد الفطر المبارك</title>
+    <style>
+        /* أنماط CSS الأساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e0e9ff 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px;
+        }
+        
+        /* زر البدء */
+        .start-btn {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            z-index: 10;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .start-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* بطاقة التهنئة */
+        .eid-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            width: 100%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            display: none;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .eid-card.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            display: block;
+        }
+        
+        /* النصوص */
+        h1 {
+            color: #8e44ad;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #8e44ad, #e74c3c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        
+        .message p {
+            margin-bottom: 15px;
+        }
+        
+        .name {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* الزخارف */
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            color: #f1c40f;
+            animation: float 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        /* التكبيرات */
+        .takbeer {
+            position: fixed;
+            font-size: 2.5rem;
+            color: #e74c3c;
+            opacity: 0;
+            animation: fadeInOut 3s ease-in-out forwards;
+            z-index: 100;
+            pointer-events: none;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* الألعاب النارية */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px;
+            animation: firework 1s ease-out forwards;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* الحركات */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 1; transform: scale(1.2); }
+            80% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+        
+        @keyframes firework {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+        }
+        
+        /* تأثيرات خاصة */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #f1c40f, 0 0 20px #f1c40f; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f1c40f, 0 0 40px #f1c40f; }
+        }
+        
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .message { font-size: 1rem; }
+            .name { font-size: 1.3rem; }
+            .eid-card { padding: 20px; }
+            .takbeer { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="start-btn" id="startBtn">
+            <span class="glow">اضغط للتهنئة بالعيد</span>
+        </button>
+        
+        <div class="eid-card" id="eidCard">
+            <div class="decoration" style="top: 10px; left: 15px; animation-delay: 0.2s;">✪</div>
+            <div class="decoration" style="top: 10px; right: 15px; animation-delay: 0.4s;">✪</div>
+            <div class="decoration" style="bottom: 10px; left: 15px; animation-delay: 0.6s;">✪</div>
+            <div class="decoration" style="bottom: 10px; right: 15px; animation-delay: 0.8s;">✪</div>
+            
+            <h1>كل عام وأنتم بخير</h1>
+            
+            <div class="message">
+                <p>بمناسبة حلول عيد الفطر المبارك، أتقدم إليكم بأصدق التهاني وأطيب الأماني، تقبل الله منا ومنكم صالح الأعمال، وجعلنا وإياكم من العائدين والفائزين.</p>
+                <p>أسأل الله أن يعيده علينا وعليكم باليمن والبركات، وأن يجعله عيد خير وبركة على الأمة الإسلامية.</p>
+            </div>
+            
+            <div class="name">من: اريام </div>
+        </div>
+    </div>
+
+    <!-- مكان إضافة الصوت -->
+    <audio id="takbeerAudio" preload="auto">
+        <!-- استبدل "takbeer.mp3" باسم ملفك الصوتي -->
+        <source src="تكبيرات العيد.mp3" type="audio/mpeg">
+        <!-- رسالة بديلة إذا لم يدعم المتصفح الصوت -->
+        المتصفح الخاص بك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('startBtn');
+            const eidCard = document.getElementById('eidCard');
+            const audio = document.getElementById('takbeerAudio');
+            
+            // تحسين الاستجابة لللمس
+            startBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            startBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(1)';
+                startCelebration();
+            });
+            
+            startBtn.addEventListener('click', startCelebration);
+            
+            function startCelebration() {
+                // إخفاء زر البدء
+                startBtn.style.display = 'none';
+                
+                // تشغيل الصوت (هام: يجب أن يكون الملف الصوتي موجوداً)
+                audio.play().catch(e => {
+                    console.log('خطأ في تشغيل الصوت:', e);
+                    // يمكنك إظهار رسالة للمستخدم إذا لزم الأمر
+                });
+                
+                // عرض التكبيرات
+                const takbeerTexts = ['الله أكبر', 'الله أكبر', 'الله أكبر', 'لا إله إلا الله', 'الله أكبر', 'ولله الحمد'];
+                let counter = 0;
+                
+                const takbeerInterval = setInterval(() => {
+                    if (counter >= takbeerTexts.length) {
+                        clearInterval(takbeerInterval);
+                        showEidCard();
+                        createFireworks();
+                        return;
+                    }
+                    
+                    const takbeer = document.createElement('div');
+                    takbeer.className = 'takbeer';
+                    takbeer.textContent = takbeerTexts[counter];
+                    takbeer.style.left = Math.random() * 80 + 10 + '%';
+                    takbeer.style.top = Math.random() * 80 + 10 + '%';
+                    takbeer.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    document.body.appendChild(takbeer);
+                    
+                    setTimeout(() => {
+                        takbeer.remove();
+                    }, 3000);
+                    
+                    counter++;
+                }, 800);
+                
+                // إنشاء الألعاب النارية
+                function createFireworks() {
+                    const fireworksCount = window.innerWidth < 768 ? 30 : 50;
+                    
+                    for (let i = 0; i < fireworksCount; i++) {
+                        setTimeout(() => {
+                            const firework = document.createElement('div');
+                            firework.className = 'firework';
+                            firework.style.left = Math.random() * 100 + 'vw';
+                            firework.style.top = Math.random() * 100 + 'vh';
+                            firework.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                            firework.style.setProperty('--x', (Math.random() - 0.5) * 150 + 'px');
+                            firework.style.setProperty('--y', (Math.random() - 0.5) * 150 + 'px');
+                            document.body.appendChild(firework);
+                            
+                            setTimeout(() => {
+                                firework.remove();
+                            }, 1000);
+                        }, i * 200);
+                    }
+                }
+                
+                // عرض بطاقة التهنئة
+                function showEidCard() {
+                    eidCard.classList.add('show');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
